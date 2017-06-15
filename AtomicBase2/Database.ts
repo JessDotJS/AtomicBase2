@@ -6,7 +6,7 @@ import {Server} from './Server';
 import {AtomicArray} from './AtomicArray';
 import {AtomicFile} from './AtomicFile';
 
-class Database {
+export class Database {
 
 	ref:any;
 	atomicPriority:any;
