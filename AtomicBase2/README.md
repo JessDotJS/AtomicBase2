@@ -1,1 +1,0 @@
-Atomic base 2 in typescript.
