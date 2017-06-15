@@ -16,7 +16,7 @@ export class Database {
     atomicArray:any;
     atomicFile:any;
 
-    constructor(databaseObject){
+    constructor(databaseObject:any){
 
         /*
          * Refs Related
