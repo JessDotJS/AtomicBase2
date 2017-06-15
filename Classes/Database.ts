@@ -23,7 +23,6 @@ export class Database {
              * */
         this.ref = new RefRegistrator(databaseObject.refs);
 
-
         this.atomicPriority = new AtomicPriority(databaseObject.schema.priority || null, this.ref);
 
         /*
