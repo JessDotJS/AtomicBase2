@@ -1,3 +1,13 @@
-<h1>
-  {{title}}
-</h1>
+
+<div class="app-container" id="inner-app-scroll-container">
+
+    <router-outlet></router-outlet>
+
+    <button md-mini-fab
+            class="page-fab"
+            id="page-nav"
+            (click)="scrollToTop()"
+            [@favPanel]="favState">
+        <md-icon>arrow_upward</md-icon>
+    </button>
+</div>
