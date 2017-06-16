@@ -17,7 +17,7 @@ export class Schema {
 	foreign:any;
 	constructor(schema:any,atomicPriority:any){
 	    if(schema != undefined && schema != null){
-	        var schemaUtilities = new SchemaUtilities();
+	        let schemaUtilities = new SchemaUtilities();
 
 	        this.atomicPriority = atomicPriority;
 
@@ -177,7 +177,7 @@ export class Schema {
 	    },
 	    primary: function(data:any, defaultPriority:any):any{
 	        if(data != undefined && data != null){
-	            var currentClientTS = new Date().getTime();
+	            let currentClientTS = new Date().getTime();
 	            return {
 	                creationTS: data.creationTS || currentClientTS,
 	                lastEventTS: currentClientTS,
@@ -191,7 +191,7 @@ export class Schema {
 	    },
 	    secondary: function(data:any, defaultPriority:any):any{
 	        if(data != undefined && data != null){
-	            var currentClientTS = new Date().getTime();
+	            let currentClientTS = new Date().getTime();
 	            return {
 	                creationTS: data.creationTS || currentClientTS,
 	                lastEventTS: currentClientTS,
@@ -205,7 +205,7 @@ export class Schema {
 	    },
 	    foreign: function(data:any, defaultPriority:any):any{
 	        if(data != undefined && data != null){
-	            var currentClientTS = new Date().getTime();
+	            let currentClientTS = new Date().getTime();
 	            return {
 	                key: data.$key || data.key,
 	                creationTS: data.creationTS || currentClientTS,
@@ -218,7 +218,6 @@ export class Schema {
 	        }
 	    }
 	}
-
 
 
 
