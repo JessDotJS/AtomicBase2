@@ -8,15 +8,15 @@ import {AtomicFile} from './AtomicFile';
 
 export class Database {
 
-    ref:any;
-    atomicPriority:any;
-    schema:any;
-    query:any;
-    server:any;
+    ref: RefRegistrator;
+    atomicPriority: AtomicPriority;
+    schema: Schema;
+    query: Query;
+    server: Server;
     atomicArray:any;
     atomicFile:any;
 
-    constructor(databaseObject:any){
+    constructor(databaseObject: any) { /* Whats tha type of database object?
 
         /*
          * Refs Related
