@@ -4,9 +4,8 @@ import firebase = require("firebase");
 export class Server{
 	serverRef:any;
 	constructor(refObject){
-		this.serverRef = refObject.root.child('atomicBase/server')
+		this.serverRef = refObject.root.child('atomicBase/server');
 	}
-
 
 	updateTS():Promise<any>{
 	    var self = this;
@@ -19,6 +18,7 @@ export class Server{
 	            });
 	    });
 	}
+
 	getTS():Promise<any>{
 	    var self = this;
 	    return new Promise(function(resolve, reject){
@@ -30,6 +30,7 @@ export class Server{
 	            });
     	});
 	}
+
 	getLatestTS():Promise<any>{
 	    var self = this;
 	    return new Promise(function(resolve, reject){
