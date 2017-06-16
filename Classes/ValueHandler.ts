@@ -27,7 +27,7 @@
 	    }
 	    return value;
  	}
- 	handleFunction(value:any, data:any){
+ 	handleFunction(value:any, data:any):any{
  		var self = this;
 	     if(value(data) == undefined){
 	        value = self.default;
