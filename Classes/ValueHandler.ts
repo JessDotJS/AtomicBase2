@@ -20,6 +20,11 @@
 	        return self.default
 	    }
  	}
+
+	/*
+	 * Value Handlers
+	 * */
+ 	
  	handleNormal(value:any, data:any):any{
  		var self = this;
 	    if(value == undefined){
