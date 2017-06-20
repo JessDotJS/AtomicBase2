@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
+import { Database } from '../../../assets/vendors/AtomicBase/Database';
+
 
 @Component({
   selector: 'app-home',
@@ -7,7 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+	storageRef:any;
+
+  constructor() { 
+
+  	//this.storageRef = firebase.storage().ref();
+
+  }
 
   ngOnInit() {
   }

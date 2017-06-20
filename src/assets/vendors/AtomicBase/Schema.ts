@@ -1,7 +1,6 @@
 import {SchemaUtilities} from './SchemaUtilities';
 import {ValueHandler} from './ValueHandler';
-import firebase = require("firebase");
-
+import * as firebase from 'firebase';
 /*
 * Schema initialization
 *

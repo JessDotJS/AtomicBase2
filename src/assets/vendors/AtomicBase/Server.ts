@@ -1,5 +1,4 @@
-import firebase = require("firebase");
-
+import * as firebase from 'firebase';
 
 export class Server{
 	serverRef:any;

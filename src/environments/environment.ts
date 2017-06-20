@@ -6,11 +6,11 @@
 export const environment = {
     production: false,
     firebase: {
-        apiKey: '<your-key>',
-        authDomain: '<your-project-authdomain>',
-        databaseURL: '<your-database-URL>',
-        projectId: '<your-project-id>',
-        storageBucket: '<your-storage-bucket>',
-        messagingSenderId: '<your-messaging-sender-id>'
+        apiKey: 'AIzaSyBgD5jpW1RMJ2vWvp-M4h4GEpLWheT7RnM',
+        authDomain: 'cryptotraderfetcher.firebaseapp.com',
+        databaseURL: 'https://cryptotraderfetcher.firebaseio.com',
+        projectId: 'cryptotraderfetcher',
+        storageBucket: 'cryptotraderfetcher.appspot.com',
+        messagingSenderId: '740463984281'
     }
 };

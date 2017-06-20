@@ -3,7 +3,7 @@ import {AtomicPriority} from './AtomicPriority';
 import {Schema} from './Schema';
 import {Query} from './Query';
 import {Server} from './Server';
-import {AtomicArray} from './AtomicArray';
+//import {AtomicArray} from './AtomicArray';
 import {AtomicFile} from './AtomicFile';
 
 export class Database {
@@ -46,7 +46,7 @@ export class Database {
         /*
          * Atomic Array Related
          * */
-        this.atomicArray = new AtomicArray(this.ref, this.schema, this.server, this.atomicPriority, databaseObject.filters);
+        //this.atomicArray = new AtomicArray(this.ref, this.schema, this.server, this.atomicPriority, databaseObject.filters);
 
 
 
