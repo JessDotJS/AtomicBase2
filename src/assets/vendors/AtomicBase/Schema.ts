@@ -38,7 +38,7 @@ export class Schema {
 	 * @returns - proper formatted object with desired schema
 	* */
 
-	build(data:any,type:any):any{
+	build(data:any,type:string):any{
 	    var self = this;
 	        let properties:any;
 	        if(type == 'snapshot'){

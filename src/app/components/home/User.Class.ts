@@ -1,30 +1,7 @@
 import { Database } from '../../../assets/vendors/AtomicBase/Database';
 
 
-const users: any[] = [
-    {
-        name: 'Jesus Graterol',
-        type: 'student',
-        age: '26'
-    },
-    {
-        name: 'David Klie',
-        type: 'teacher',
-        age: '22'
-    },
-    {
-        name: 'Jayme Armstrong',
-        type: 'student',
-        age: '24'
-    },
-    {
-        name: 'Lesther Caballero',
-        type: 'staff',
-        age: '23'
-    },
-];
 
-let user = users[0];
 
 
 export class User {
@@ -36,7 +13,7 @@ export class User {
                         //Ref Registrator.
                         refs: {
                             //main ref
-                            primary: 'users',
+                            primary: 'users/all',
 
                             /*
                             * Secondary Refs have 2 purposes:
@@ -56,7 +33,7 @@ export class User {
                                 return new Promise(function(resolve, reject){
                                     //In this case, the admin user node
                                     resolve([
-                                        'adminUsers/' + user.type
+                                        'users/' + user.type +'/' + user.$key
                                     ]);
                                 });
                             },
@@ -73,13 +50,13 @@ export class User {
                             *           userKey
                             *               name
                             * */
-                            foreign: function(user){
+                            /*foreign: function(user){
                                 return new Promise(function(resolve, reject){
                                     resolve([
                                         'post/comments/COMMENT_KEY/' + user.type,
                                     ]);
                                 });
-                            }
+                            }*/
 
                             /*
                             * Take Away
@@ -106,31 +83,29 @@ export class User {
                                     * If the value provided is undefined the Atomic Schema will throw an error
                                     * unless you have setup the default property.
                                     * */
-                                    value: '=',
-                                    //Recommended when the property is optional
-                                    default: null
+                                    value: '='
                                 },
 
                                 /*
                                 * Imagine a case where you had a property which value depended on another
                                 * property. For example, totalBalance = availableBalance + pendingBalance
                                 */
-                                availableBalance: {
+                                type: {
+                                    value: '='
+                                },
+                                age: {
                                     value: '=',
                                     default: 0
-                                },
-                                pendingBalance: {
-                                    value: '=',
-                                    default: 0
-                                },
-                                totalBalance: {
-                                    value: function(user){
-                                        return user.availableBalance + user.pendingBalance;
-                                    }
-                                },
+                                }
                             },
                             secondary:{
                                 name: {
+                                    /*
+                                    * value can take any kind of data, including functions.
+                                    * In case this data will be provided for sure use '='.
+                                    * If the value provided is undefined the Atomic Schema will throw an error
+                                    * unless you have setup the default property.
+                                    * */
                                     value: '='
                                 }
                             },
