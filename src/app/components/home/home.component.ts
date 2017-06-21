@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { Database } from '../../../assets/vendors/AtomicBase/Database';
-import { User } from './User.Class'
+import { Entity } from './Entity.Class'
 
 
 
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 	storageRef:any;
 
   constructor() { 
-  	this.user = new User();
+  	this.user = new Entity('users/all','users');
   	//this.storageRef = firebase.storage().ref();
 
 	const users: any[] = [
@@ -46,13 +46,13 @@ export class HomeComponent implements OnInit {
 	    },
 	];
 
-
-  	let userObject = this.user.db.schema.build(users[0], 'primary');
-
-  	this.user.db.query.create(userObject);
-
-  	console.log(userObject.name);
-  	//this.user.db.query.create();
+	this.user.create(users[0]);
+	
+  	//let userObject = this.user.db.schema.build(users[0], 'primary');
+  	//let userObject = this.user.build(users[0]);
+  	//this.user.db.query.create(userObject);
+  	//this.user.create(userObject);
+  	//console.log(userObject.name);
 
   }
 

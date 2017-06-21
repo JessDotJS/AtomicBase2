@@ -4,16 +4,16 @@ import { Database } from '../../../assets/vendors/AtomicBase/Database';
 
 
 
-export class User {
+export class Entity {
 
-	db:any;
-	constructor(){
+	public db:any;
+	constructor(PrimaryPath:string,SecundaryPath:string,ForeignPath?:string){
 
                 this.db = new Database({
                         //Ref Registrator.
                         refs: {
                             //main ref
-                            primary: 'users/all',
+                            primary: PrimaryPath, //'users/all'
 
                             /*
                             * Secondary Refs have 2 purposes:
@@ -30,10 +30,12 @@ export class User {
                                 * which will allow you to access all properties
                                 * specified in the schema plus $key and $priority
                                 */
+                                var self = this;
+                                self.objectEntity = user;
                                 return new Promise(function(resolve, reject){
                                     //In this case, the admin user node
                                     resolve([
-                                        'users/' + user.type +'/' + user.$key
+                                        SecundaryPath+'/'+ user.type +'/' + user.$key  // 'users/' + user.type +'/' + user.$key
                                     ]);
                                 });
                             },
@@ -127,8 +129,19 @@ export class User {
 						}
 
                 });
+
      
 	}
+
+    build(objectEntity){
+        return this.db.schema.build(objectEntity, 'primary');
+    }
+
+    create(objectEntity){
+        let userObject = this.build(objectEntity);
+        console.log(userObject.name);
+        this.db.query.create(userObject);
+    }
 
 }
 
