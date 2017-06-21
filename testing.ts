@@ -16,7 +16,7 @@ export const users: any[] = [
     {
         name: 'David Klie',
         type: 'teacher',
-        age: '22'
+        age: '23'
     },
     {
         name: 'Jayme Armstrong',
