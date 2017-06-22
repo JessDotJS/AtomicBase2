@@ -7,6 +7,16 @@ export class Query {
         this.schema = schema;
     }
 
+
+    /*
+    * CRUD Related Methods
+    *
+    * create
+    * update
+    * remove
+    * alter
+    * processFanoutObject
+    * */
     public create(atomicObject: any): Promise<any> {
         const self = this;
         let fanoutObject = {};
