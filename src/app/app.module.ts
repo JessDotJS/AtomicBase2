@@ -42,7 +42,6 @@ import { routes } from './shared/routes/app.routes';
 import { AngularFireModule } from 'angularfire2';
 
 
-
 /*
 * Environment Variables
 * */

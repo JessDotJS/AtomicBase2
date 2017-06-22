@@ -6,11 +6,11 @@
 export const environment = {
     production: false,
     firebase: {
-        apiKey: '<your-key>',
-        authDomain: '<your-project-authdomain>',
-        databaseURL: '<your-database-URL>',
-        projectId: '<your-project-id>',
-        storageBucket: '<your-storage-bucket>',
-        messagingSenderId: '<your-messaging-sender-id>'
+        apiKey: "AIzaSyBchNdBC4jJcVTt_u-7zgLjzxxFzzvWyTo",
+        authDomain: "atomicbase2sampleapp.firebaseapp.com",
+        databaseURL: "https://atomicbase2sampleapp.firebaseio.com",
+        projectId: "atomicbase2sampleapp",
+        storageBucket: "atomicbase2sampleapp.appspot.com",
+        messagingSenderId: "1007791672205"
     }
 };
