@@ -53,19 +53,21 @@ import { environment } from '../environments/environment';
  * Components
  * */
 
-//Root Component
+// Root Component
 import { AppComponent } from './app.component';
 
-//Home Component
+// Home Component
 import { HomeComponent } from './components/home/home.component';
 
-var config = {
-    apiKey: "AIzaSyBgD5jpW1RMJ2vWvp-M4h4GEpLWheT7RnM",
-    authDomain: "cryptotraderfetcher.firebaseapp.com",
-    databaseURL: "https://cryptotraderfetcher.firebaseio.com",
-    projectId: "cryptotraderfetcher",
-    storageBucket: "cryptotraderfetcher.appspot.com",
-    messagingSenderId: "740463984281"
+
+
+const config = {
+    apiKey: 'AIzaSyBchNdBC4jJcVTt_u-7zgLjzxxFzzvWyTo',
+    authDomain: 'atomicbase2sampleapp.firebaseapp.com',
+    databaseURL: 'https://atomicbase2sampleapp.firebaseio.com',
+    projectId: 'atomicbase2sampleapp',
+    storageBucket: 'atomicbase2sampleapp.appspot.com',
+    messagingSenderId: '1007791672205'
 };
 firebase.initializeApp(config);
 
