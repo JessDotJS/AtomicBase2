@@ -55,19 +55,19 @@ export class AtomicEntity {
     public create(record: any): Promise<any> {
         return this
             .query
-            .create(this.schema.build(record, 'primary'));
+            .create(record);
     }
 
     public update(record: any): Promise<any> {
         return this
             .query
-            .update(this.schema.build(record, 'primary'));
+            .update(record);
     }
 
     public remove(record: any): Promise<any> {
         return this
             .query
-            .remove(this.schema.build(record, 'primary'));
+            .remove(record);
     }
 }
 
