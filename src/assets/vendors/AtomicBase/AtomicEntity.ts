@@ -48,11 +48,26 @@ export class AtomicEntity {
     }
 
 
+
+    /*
+    * Query Based Methods
+    * */
     public create(record: any): Promise<any> {
         return this
             .query
             .create(this.schema.build(record, 'primary'));
     }
 
+    public update(record: any): Promise<any> {
+        return this
+            .query
+            .update(this.schema.build(record, 'primary'));
+    }
+
+    public remove(record: any): Promise<any> {
+        return this
+            .query
+            .remove(this.schema.build(record, 'primary'));
+    }
 }
 

@@ -18,11 +18,8 @@ export class HomeComponent implements OnInit {
 
     constructor() {
         this.user = new User();
-        this.user.db.query.create(this.user.db.schema.build({
-            name: 'Jesus Graterol',
-            type: 'student',
-            age: 24
-        }, 'primary'));
+
+
     }
 
     ngOnInit() {
