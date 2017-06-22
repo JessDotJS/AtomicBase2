@@ -30,7 +30,7 @@ export class User extends AtomicEntity {
                 foreign: function(user){
                     return new Promise(function(resolve, reject){
                         resolve([
-                            'post/comments/COMMENT_KEY/' + user.type,
+                            'favoritePeople/' + user.$key,
                         ]);
                     });
                 }

@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
         // Create user
         self.user.create({
             name: 'Jesus Graterol',
-            type: 'teacher',
+            type: 'teachers',
             age: 26})
             .then(function(userKey){
                 console.log('User Created: ' + userKey);
@@ -55,6 +55,44 @@ export class HomeComponent implements OnInit {
                         console.log(self.user.schema.build(atomicObject, 'primary'));
                         console.log(self.user.schema.build(atomicObject, 'secondary'));
                         console.log(self.user.schema.build(atomicObject, 'foreign'));
+
+
+
+                        // Creating a Foreign Ref
+                        self.user.ref.root
+                            .child('favoritePeople/' + userKey)
+                            .set(self.user.schema.build(atomicObject, 'foreign'))
+                            .then(function(response){
+                                console.log('Foreign Element Created');
+
+
+
+                                // Updating the record
+                                atomicObject.name = 'John Wiesser';
+                                atomicObject.age = 50;
+                                console.log('Updating record in 5 seconds...');
+                                setTimeout(function(){
+                                    // Removing the record
+                                    self.user.update(atomicObject)
+                                        .then(function(response){
+                                            console.log('Record Updated');
+
+                                            // Removing the record
+                                            console.log('Removing record in 5 seconds...');
+                                            setTimeout(function(){
+                                                // Removing the record
+                                                self.user.remove(atomicObject)
+                                                    .then(function(response){
+                                                        console.log('Record Removed');
+                                                        
+                                                    })
+                                                    .catch(function(err){ console.log(err); });
+                                            }, 5000);
+                                        })
+                                        .catch(function(err){ console.log(err); });
+                                }, 5000);
+                            })
+                            .catch(function(err){ console.log(err); });
 
                     })
                     .catch(function(err){ console.log(err); });

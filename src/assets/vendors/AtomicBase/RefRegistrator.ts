@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+
 export class RefRegistrator {
 	root:any;
 	primary:any;
