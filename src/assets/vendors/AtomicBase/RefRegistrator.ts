@@ -31,7 +31,7 @@ export class RefRegistrator {
 
 	}
 
-	getSecondaryRefs(atomicObject: any): Promise<any> {
+	public getSecondaryRefs(atomicObject: any): Promise<any> {
 		const self = this;
 		return new Promise(function(resolve,reject) {
 	        self.secondary(atomicObject)
@@ -41,7 +41,7 @@ export class RefRegistrator {
 		})
 	}
 
-	getForeignRefs(atomicObject: any): Promise<any> {
+	public getForeignRefs(atomicObject: any): Promise<any> {
 		const self = this;
 	    return new Promise(function(resolve, reject) {
 	        self.foreign(atomicObject)

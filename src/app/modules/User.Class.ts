@@ -2,7 +2,6 @@
  * Created by jessdotjs on 22/06/17.
  */
 import {AtomicEntity} from '../../assets/vendors/AtomicBase/AtomicEntity';
-import * as firebase from 'firebase';
 
 
 
@@ -49,7 +48,8 @@ export class User extends AtomicEntity {
             schema: {
                 primary: {
                     name: {
-                        value: '='
+                        value: '=',
+                        defaultValue: 'Jess Graterol'
                     },
                     type: {
                         value: '='

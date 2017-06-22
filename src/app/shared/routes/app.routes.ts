@@ -1,17 +1,38 @@
 import { Routes } from '@angular/router';
 import { MetaGuard } from '@ngx-meta/core';
-import { HomeComponent } from '../../components/home/home.component';
+import { SchemaComponent } from '../../components/schema/schema.component';
+import { CrudComponent } from '../../components/crud/crud.component';
 
 
 // Route Configuration
 export const routes: Routes = [
     {
         path: '',
-        component: HomeComponent,
+        component: SchemaComponent,
         data: {
             meta: {
-                title: 'AtomicSeed',
-                description: 'This is an All-in-one package'
+                title: 'Schema Testing',
+                description: 'Some tests'
+            }
+        }
+    },
+    {
+        path: 'schema',
+        component: SchemaComponent,
+        data: {
+            meta: {
+                title: 'Schema Testing',
+                description: 'Some tests'
+            }
+        }
+    },
+    {
+        path: 'crud',
+        component: CrudComponent,
+        data: {
+            meta: {
+                title: 'Schema Testing',
+                description: 'Some tests'
             }
         }
     }

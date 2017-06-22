@@ -23,22 +23,24 @@ export class Query {
         let primaryRef = self.ref.root.child(self.ref.primary);
 
         return new Promise(function(resolve, reject) {
-            primaryRef.push(self.schema.build(atomicObject, 'primary'))
+            const objectBuild = self.schema.build(atomicObject, 'primary');
+            primaryRef.push(objectBuild)
                 .then(function(snapshot) {
-                atomicObject.$key = snapshot.key;
-                if(self.ref.secondary){
-                    self.ref.getSecondaryRefs(atomicObject).then(function(secondaryRefs) {
-                        for(let i = 0; i < secondaryRefs.length; i++){
-                            fanoutObject[secondaryRefs[i]] = self.schema.build(atomicObject, 'secondary')
-                        }
-                        self.processFanoutObject(fanoutObject).then(function(response){
-                            resolve(atomicObject.$key);
+                    atomicObject.$key = snapshot.key;
+                    if(self.ref.secondary){
+                        self.ref.getSecondaryRefs(atomicObject).then(function(secondaryRefs) {
+                            for(let i = 0; i < secondaryRefs.length; i++) {
+                                fanoutObject[secondaryRefs[i]] =
+                                    self.schema.build(atomicObject, 'secondary')
+                            }
+                            self.processFanoutObject(fanoutObject).then(function(response) {
+                                resolve(atomicObject.$key);
+                            }).catch(function(err){reject(err)});
                         }).catch(function(err){reject(err)});
-                    }).catch(function(err){reject(err)});
-                }else{
-                    resolve(atomicObject.$key);
-                }
-            }).catch(function(err){reject(err)});
+                    }else{
+                        resolve(atomicObject.$key);
+                    }
+                }).catch(function(err){reject(err)});
         });
     }
 
@@ -52,10 +54,10 @@ export class Query {
         });
     }
 
-    public remove(atomicObject:any): Promise<any> {
+    public remove(atomicObject: any): Promise<any> {
         const self = this;
-        return new Promise(function(resolve, reject){
-            self.alter(atomicObject, 'remove').then(function(response){
+        return new Promise(function(resolve, reject) {
+            self.alter(atomicObject, 'remove').then(function(response) {
                 resolve(response);
             }).catch(function(err){reject(err)});
         });
@@ -98,16 +100,16 @@ export class Query {
             /*
              * Secondary & Foreign
              * */
-            if(self.ref.secondary && self.ref.foreign){
-                self.ref.secondary(atomicObject).then(function(secondaryRefs){
-                    self.ref.foreign(atomicObject).then(function(foreignRefs){
+            if(self.ref.secondary && self.ref.foreign) {
+                self.ref.secondary(atomicObject).then(function(secondaryRefs) {
+                    self.ref.foreign(atomicObject).then(function(foreignRefs) {
                         for(let i = 0; i <secondaryRefs.length; i++){
                             fanoutObject[secondaryRefs[i]] = secondary;
                         }
                         for(let i = 0; i < foreignRefs.length; i++){
                             fanoutObject[foreignRefs[i]] = foreign;
                         }
-                        self.processFanoutObject(fanoutObject).then(function(response){
+                        self.processFanoutObject(fanoutObject).then(function(response) {
                             resolve(response);
                         }).catch(function(err){reject(err)});
                     }).catch(function(err){reject(err)});
@@ -117,11 +119,11 @@ export class Query {
              * Secondary & !Foreign
              * */
             else if(self.ref.secondary && !self.ref.foreign){
-                self.ref.secondary(atomicObject).then(function(secondaryRefs){
-                    for(let i = 0; i <secondaryRefs.length; i++){
+                self.ref.secondary(atomicObject).then(function(secondaryRefs) {
+                    for(let i = 0; i <secondaryRefs.length; i++) {
                         fanoutObject[secondaryRefs[i]] = secondary;
                     }
-                    self.processFanoutObject(fanoutObject).then(function(response){
+                    self.processFanoutObject(fanoutObject).then(function(response) {
                         resolve(response);
                     }).catch(function(err){reject(err)});
                 }).catch(function(err){reject(err)});
@@ -131,11 +133,11 @@ export class Query {
              * !Secondary & Foreign
              * */
             else if(!self.ref.secondary && self.ref.foreign){
-                self.ref.foreign(atomicObject).then(function(foreignRefs){
+                self.ref.foreign(atomicObject).then(function(foreignRefs) {
                     for(let i = 0; i < foreignRefs.length; i++){
                         fanoutObject[foreignRefs[i]] = foreign;
                     }
-                    self.processFanoutObject(fanoutObject).then(function(response){
+                    self.processFanoutObject(fanoutObject).then(function(response) {
                         resolve(response);
                     }).catch(function(err){reject(err)});
                 }).catch(function(err){reject(err)});
@@ -145,7 +147,7 @@ export class Query {
              * !Secondary & !Foreign
              * */
             else{
-                self.processFanoutObject(fanoutObject).then(function(response){
+                self.processFanoutObject(fanoutObject).then(function(response) {
                     resolve(response);
                 }).catch(function(err){reject(err)});
             }

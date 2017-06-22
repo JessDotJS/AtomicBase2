@@ -13,31 +13,40 @@ export class AtomicPriority {
         this.increment = 50000000;
 
         if (config === undefined) {
-            this.orderSelected = 'dateAsc';
+            this.orderSelected = 'dateDesc';
         } else {
             this.orderSelected = config.order;
+            this.childAdded = config.childAdded || 'last';
         }
     }
 
     public getPriority(data: any): any {
         const self = this;
         if (self.orderSelected !== undefined) {
-            if (typeof self.orderSelected === 'function') {
+            if (self.orderSelected === 'custom') {
+                return new Promise(function(resolve, reject){
+                    self[self.childAdded]()
+                        .then(function(defaultPriority){
+                            resolve(defaultPriority);
+                        })
+                        .catch(function(err){ reject(err); });
+                });
+            }else if (typeof self.orderSelected === 'function') {
                 return self.orderSelected(data);
             }else {
                 return self[self.orderSelected]();
             }
         }else {
-            return self.dateAsc();
+            return AtomicPriority.dateAsc();
         }
     }
 
-    private dateDesc(): any {
+    private static dateDesc(): any {
         const currentClientTS = new Date().getTime();
         return -(currentClientTS);
     }
 
-    private dateAsc(): any {
+    private static dateAsc(): any {
         return new Date().getTime();
     }
 

@@ -56,8 +56,9 @@ import { environment } from '../environments/environment';
 // Root Component
 import { AppComponent } from './app.component';
 
-// Home Component
-import { HomeComponent } from './components/home/home.component';
+// Components Component
+import { CrudComponent } from './components/crud/crud.component';
+import { SchemaComponent } from './components/schema/schema.component';
 
 
 
@@ -78,7 +79,8 @@ firebase.initializeApp(config);
     declarations: [
         TranslatePipe,
         AppComponent,
-        HomeComponent
+        CrudComponent,
+        SchemaComponent
     ],
     imports: [
         BrowserModule,

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../modules/User.Class';
+
 
 @Component({
   selector: 'app-schema',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./schema.component.css']
 })
 export class SchemaComponent implements OnInit {
+  user: any;
 
-  constructor() { }
+  constructor() {
+    this.user = new User();
+  }
 
   ngOnInit() {
+    const self = this;
+
+    let primarySchema = self.user.schema.build({
+      name: 'Jesus Graterol',
+      type: 'teachers',
+      age: 26}, 'primary');
+
+      console.log(primarySchema);
   }
 
 }

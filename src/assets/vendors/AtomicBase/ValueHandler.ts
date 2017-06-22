@@ -2,7 +2,7 @@
  * Value Handler
  * */
  export class ValueHandler{
- 	default:any;
+ 	default: any;
  	constructor(){
  		this.default = null;
  	}
