@@ -1,16 +1,16 @@
 import * as firebase from 'firebase';
 
 export class RefRegistrator {
-	root:any;
-	primary:any;
-	secondary:any;
-	foreign:any;
-	rootStorage:any;
-	primaryStorage:any;
+	public root: any;
+    public primary: any;
+    public secondary: any;
+    public foreign: any;
+    public rootStorage: any;
+    public primaryStorage: any;
 
 	constructor(refsObject:any){
 
-	    if(firebase != undefined && firebase != null){
+	    if(firebase !== undefined && firebase !== null){
 	        /*
 	        * Database Related
 	        * */
@@ -31,29 +31,24 @@ export class RefRegistrator {
 
 	}
 
-	getSecondaryRefs(afObject:any):Promise<any>{
-		var self = this;
-		return new Promise(function(resolve,reject){
-	        self.secondary(afObject)
-	        	.then(function(secondaryRefs){
+	getSecondaryRefs(atomicObject: any): Promise<any> {
+		const self = this;
+		return new Promise(function(resolve,reject) {
+	        self.secondary(atomicObject)
+	        	.then(function(secondaryRefs) {
 	            	resolve(secondaryRefs);
-	        	})
-	        	.catch(function(err){
-	        		reject(err)
-	        	});
+	        	}).catch(function(err) { reject(err); });
 		})
 	}
 
-	getForeignRefs(afObject:any):Promise<any>{
-		var self = this;
-	    return new Promise(function(resolve, reject){
-	        self.foreign(afObject)
-	        	.then(function(foreignRefs){
+	getForeignRefs(atomicObject: any): Promise<any> {
+		const self = this;
+	    return new Promise(function(resolve, reject) {
+	        self.foreign(atomicObject)
+	        	.then(function(foreignRefs) {
 	            	resolve(foreignRefs);
 	        	})
-	        	.catch(function(err){
-	        		reject(err)
-	        	});
+	        	.catch(function(err) { reject(err); });
 	    });
 	}
 

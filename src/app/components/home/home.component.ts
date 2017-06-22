@@ -66,13 +66,11 @@ export class HomeComponent implements OnInit {
                                 console.log('Foreign Element Created');
 
 
-
                                 // Updating the record
                                 atomicObject.name = 'John Wiesser';
                                 atomicObject.age = 50;
                                 console.log('Updating record in 5 seconds...');
                                 setTimeout(function(){
-                                    // Removing the record
                                     self.user.update(atomicObject)
                                         .then(function(response){
                                             console.log('Record Updated');
@@ -80,11 +78,10 @@ export class HomeComponent implements OnInit {
                                             // Removing the record
                                             console.log('Removing record in 5 seconds...');
                                             setTimeout(function(){
-                                                // Removing the record
                                                 self.user.remove(atomicObject)
                                                     .then(function(response){
                                                         console.log('Record Removed');
-                                                        
+
                                                     })
                                                     .catch(function(err){ console.log(err); });
                                             }, 5000);
@@ -93,14 +90,8 @@ export class HomeComponent implements OnInit {
                                 }, 5000);
                             })
                             .catch(function(err){ console.log(err); });
-
-                    })
-                    .catch(function(err){ console.log(err); });
-
-
-
-            })
-            .catch(function(err) { console.log(err)});
+                    }).catch(function(err){ console.log(err); });
+            }).catch(function(err) { console.log(err)});
     }
 
 }
