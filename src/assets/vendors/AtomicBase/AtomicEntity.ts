@@ -12,7 +12,6 @@ import {AtomicFile} from './AtomicFile';
 
 
 export class AtomicEntity {
-    public rootRef: any;
     public ref: any;
     public atomicPriority: any;
     public schema: any;

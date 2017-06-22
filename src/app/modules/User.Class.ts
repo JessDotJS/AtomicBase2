@@ -8,10 +8,8 @@ import * as firebase from 'firebase';
 
 
 export class User extends AtomicEntity {
-    public rootRef: any;
 
     constructor() {
-
         super({
 
             refs: {
@@ -20,7 +18,6 @@ export class User extends AtomicEntity {
 
                 secondary: function(user){
                     const self = this;
-                    self.objectEntity = user;
                     return new Promise(function(resolve, reject){
                         // In this case, the admin user node
                         resolve([
@@ -32,7 +29,7 @@ export class User extends AtomicEntity {
                     const self = this;
                     return new Promise(function(resolve, reject){
                         // Check if it is favorite
-                        firebase.database().ref()
+                        self.root
                             .child('favoritePeople/' + user.$key)
                             .once('value')
                             .then(function(snapshot){
