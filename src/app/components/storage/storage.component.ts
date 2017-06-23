@@ -26,9 +26,8 @@ export class StorageComponent implements OnInit {
     this.uploadImage((<HTMLInputElement>document.getElementById('image')).files[0]);
   }
 
-  uploadImage(file){
+  uploadImage(selectedFile){
     const self = this;
-    let selectedFile = file;
     this.user.upload(selectedFile)
               .on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
                   self.UploadProgress  = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
