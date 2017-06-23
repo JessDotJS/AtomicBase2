@@ -19,6 +19,7 @@ export class AtomicEntity {
     public atomicFile: any;
 
     constructor(dbObject: any) {
+  
         /*
          * Refs Related
          * */
@@ -70,7 +71,7 @@ export class AtomicEntity {
             .remove(record);
     }
 
-    public upload(file:any): Promise<any>{
+    public upload(file:any){ 
         return this.atomicFile.upload(file);
     }
 }

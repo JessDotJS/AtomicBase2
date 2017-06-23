@@ -6,4 +6,6 @@
 	<input type="file" id="image" type="file">
 </form>
 
-<button (click)= "uploadImage()">Upload image</button>
+<p *ngIf="UploadProgress!=null">Upload progress: {{UploadProgress}} </p>
+
+<button (click)= "UpLoad()">Upload image</button>
