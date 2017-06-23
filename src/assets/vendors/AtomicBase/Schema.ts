@@ -1,4 +1,3 @@
-import {SchemaUtilities} from './SchemaUtilities';
 import {ValueHandler} from './ValueHandler';
 import * as firebase from 'firebase';
 
@@ -9,6 +8,7 @@ export class Schema {
     private primary: any;
     private secondary: any;
     private foreign: any;
+    private valueHandler: any;
 
     /*
      * Schema initialization
@@ -19,7 +19,7 @@ export class Schema {
     constructor(schema: any, atomicPriority: any) {
         if(schema !== undefined && schema !== null) {
             this.atomicPriority = atomicPriority;
-
+            this.valueHandler = new ValueHandler();
 
             //Build Schema Configuration Objects
             this.primary = schema.primary || false;
@@ -50,7 +50,7 @@ export class Schema {
             properties  = data
         }
 
-        return self.buildSchemaProperties(self.getDefaults(data, type), properties, type);
+        return self.buildSchemaProperties(self.getPrebuiltData(data, type), properties, type);
     }
 
     /*
@@ -95,9 +95,8 @@ export class Schema {
      * @returns - proper formatted object with desired schema defaults
      * */
 
-    getDefaults(data: any, type: any): any{
-        const self = this;
-        return self.defaultValue[type](data, self.atomicPriority.getPriority(data));
+    private getPrebuiltData(data: any, type: any): any{
+        return this.prebuiltData[type](data, this.atomicPriority.getPriority(data));
     }
 
     /*
@@ -110,21 +109,21 @@ export class Schema {
      * @returns - final schema object
      * */
 
-    getPropertyValue(propertyObject:any, propertiesData:any, type:any):any{
+    private getPropertyValue(propertyObject: any, propertiesData: any, type: any): any {
 
-        var self = this;
+        const self = this;
         let valueHandler = new ValueHandler();
         let dataValue:any;
 
         if(self[type][propertyObject.key].value == '='){
             dataValue = valueHandler.getValue(propertyObject.value, propertiesData);
             if(dataValue == undefined || dataValue == null){
-                dataValue = valueHandler.getValue(self[type][propertyObject.key].default, propertiesData);
+                dataValue = valueHandler.getValue(self[type][propertyObject.key].defaultValue, propertiesData);
             }
         }else{
             dataValue = valueHandler.getValue(self[type][propertyObject.key].value, propertiesData);
             if(dataValue == undefined || dataValue == null){
-                valueHandler.getValue(self[type][propertyObject.key].default, propertiesData);
+                valueHandler.getValue(self[type][propertyObject.key].defaultValue, propertiesData);
             }
         }
         return dataValue;
@@ -132,17 +131,16 @@ export class Schema {
     }
 
     /*
-     * Default.type
+     * prebuiltData.type
      *
      * @params
      * data - an Entity's object
      * defaultPriority - predetermined priority of the item
      * type - available options: atomicObject, primary, secondary & foreign
-     * @returns - default schema object
+     * @returns - PreBuilt schema object
      * */
 
-    defaultValue ={
-
+    private prebuiltData = {
         atomicObject: function(data: any, defaultPriority: any): any {
             if(data.exists()) {
                 return {
@@ -162,7 +160,6 @@ export class Schema {
                 return {
                     creationTS: data.creationTS || currentClientTS,
                     lastEventTS: currentClientTS,
-                    // latestServerTS: firebase.database.ServerValue.TIMESTAMP,
                     '.priority': data.$priority  || defaultPriority
                 }
             }else{
@@ -176,7 +173,6 @@ export class Schema {
                 return {
                     creationTS: data.creationTS || currentClientTS,
                     lastEventTS: currentClientTS,
-                    // latestServerTS: firebase.database.ServerValue.TIMESTAMP,
                     '.priority': data.$priority  || defaultPriority
                 }
             }else{
@@ -191,7 +187,6 @@ export class Schema {
                     key: data.$key || data.key,
                     creationTS: data.creationTS || currentClientTS,
                     lastEventTS: currentClientTS,
-                    // latestServerTS: firebase.database.ServerValue.TIMESTAMP,
                     '.priority': data.$priority  || defaultPriority
                 }
             }else{

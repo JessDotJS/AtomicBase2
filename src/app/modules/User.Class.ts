@@ -49,7 +49,14 @@ export class User extends AtomicEntity {
                 primary: {
                     name: {
                         value: '=',
-                        defaultValue: 'Jess Graterol'
+                        defaultValue: function(user: any): string{
+                            return 'Jess Graterol';
+                        }
+                    },
+                    nameSearchable: {
+                        value: function(user: any): string{
+                            return user.name.toLowerCase();
+                        }
                     },
                     type: {
                         value: '='
