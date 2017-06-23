@@ -5,7 +5,7 @@ import {RefRegistrator} from './RefRegistrator' ;
 import {AtomicPriority} from './AtomicPriority';
 import {Schema} from './Schema';
 import {Query} from './Query';
-import {AtomicFile} from './AtomicFile';
+import {AtomicFile2} from './AtomicFile2';
 
 
 
@@ -44,7 +44,7 @@ export class AtomicEntity {
         /*
          * Atomic File Related
          * */
-        this.atomicFile = new AtomicFile(this.ref);
+        this.atomicFile = new AtomicFile2(this.ref);
     }
 
 
@@ -68,6 +68,10 @@ export class AtomicEntity {
         return this
             .query
             .remove(record);
+    }
+
+    public upload(file:any): Promise<any>{
+        return this.atomicFile.upload(file);
     }
 }
 
