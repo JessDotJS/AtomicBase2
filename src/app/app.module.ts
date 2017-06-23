@@ -59,6 +59,8 @@ import { AppComponent } from './app.component';
 // Components Component
 import { CrudComponent } from './components/crud/crud.component';
 import { SchemaComponent } from './components/schema/schema.component';
+import { PriorityComponent } from './components/priority/priority.component';
+import { StorageComponent } from './components/storage/storage.component';
 
 
 
@@ -80,7 +82,9 @@ firebase.initializeApp(config);
         TranslatePipe,
         AppComponent,
         CrudComponent,
-        SchemaComponent
+        SchemaComponent,
+        PriorityComponent,
+        StorageComponent
     ],
     imports: [
         BrowserModule,
