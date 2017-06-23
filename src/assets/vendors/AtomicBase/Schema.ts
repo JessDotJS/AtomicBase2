@@ -63,7 +63,7 @@ export class Schema {
      * @returns - final schema object
      * */
 
-    buildSchemaProperties(defaults: any, data: any, type: any): any {
+    private buildSchemaProperties(defaults: any, data: any, type: any): any {
         const self = this;
         let dataObject = defaults;
         let selfSchema: any;
@@ -113,14 +113,14 @@ export class Schema {
 
         const self = this;
         let valueHandler = new ValueHandler();
-        let dataValue:any;
+        let dataValue: any;
 
-        if(self[type][propertyObject.key].value == '='){
+        if (self[type][propertyObject.key].value == '=') {
             dataValue = valueHandler.getValue(propertyObject.value, propertiesData);
             if(dataValue == undefined || dataValue == null){
                 dataValue = valueHandler.getValue(self[type][propertyObject.key].defaultValue, propertiesData);
             }
-        }else{
+        }else {
             dataValue = valueHandler.getValue(self[type][propertyObject.key].value, propertiesData);
             if(dataValue == undefined || dataValue == null){
                 valueHandler.getValue(self[type][propertyObject.key].defaultValue, propertiesData);

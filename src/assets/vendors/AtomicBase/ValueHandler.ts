@@ -1,14 +1,13 @@
 /*
  * Value Handler
  * */
- export class ValueHandler{
- 	default: any;
+ export class ValueHandler {
+	 defaultVal: any;
  	constructor(){
- 		this.default = null;
+ 		this.defaultVal = null;
  	}
  	getValue(value:any, data:any):any{
-	    var self = this;
-	    let foundVal = null;
+	    const self = this;
 	    let valueType = typeof value;
 	    if(value != undefined){
 	        if(valueType == 'string' || valueType == 'number' || valueType == 'object' || valueType == 'boolean'){
@@ -17,7 +16,7 @@
 	            return self.handleFunction(value, data);
 	        }
 	    }else{
-	        return self.default
+	        return self.defaultVal
 	    }
  	}
 
@@ -25,17 +24,17 @@
 	 * Value Handlers
 	 * */
  	
- 	handleNormal(value:any, data:any):any{
- 		var self = this;
-	    if(value == undefined){
-	        value = self.default;
+ 	handleNormal(value: any, data: any): any{
+ 		const self = this;
+	    if (value == undefined) {
+	        value = self.defaultVal;
 	    }
 	    return value;
  	}
- 	handleFunction(value:any, data:any):any{
- 		var self = this;
+ 	handleFunction(value: any, data: any): any{
+		const self = this;
 	     if(value(data) == undefined){
-	        value = self.default;
+	        value = self.defaultVal;
 	    }
 	    return value(data);
  	}
