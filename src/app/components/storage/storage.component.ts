@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AtomicFile2} from '../../../assets/vendors/AtomicBase/AtomicFile2';
+import {AtomicFile} from '../../../assets/vendors/AtomicBase/AtomicFile';
 import { User } from '../../modules/User.Class';
 import * as firebase from 'firebase';
 
