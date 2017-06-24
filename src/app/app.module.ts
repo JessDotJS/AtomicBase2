@@ -7,7 +7,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
-import * as firebase from 'firebase';
+
+
+
 
 /*
  * Angular Material & Front-End Tools
@@ -39,8 +41,10 @@ import { routes } from './shared/routes/app.routes';
 /*
  * AngularFire + AtomicBase2 + Back-End Tools
  * */
-import { AngularFireModule } from 'angularfire2';
-
+/*import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';*/
+import * as firebase from 'firebase';
 
 
 /*
@@ -61,18 +65,13 @@ import { CrudComponent } from './components/crud/crud.component';
 import { SchemaComponent } from './components/schema/schema.component';
 import { PriorityComponent } from './components/priority/priority.component';
 import { StorageComponent } from './components/storage/storage.component';
+import { AtomicArrayComponent } from './components/atomic-array/atomic-array.component';
+import { AtomicObjectComponent } from './components/atomic-object/atomic-object.component';
 
 
 
-const config = {
-    apiKey: 'AIzaSyBchNdBC4jJcVTt_u-7zgLjzxxFzzvWyTo',
-    authDomain: 'atomicbase2sampleapp.firebaseapp.com',
-    databaseURL: 'https://atomicbase2sampleapp.firebaseio.com',
-    projectId: 'atomicbase2sampleapp',
-    storageBucket: 'atomicbase2sampleapp.appspot.com',
-    messagingSenderId: '1007791672205'
-};
-firebase.initializeApp(config);
+
+firebase.initializeApp(environment.firebase);
 
 
 
@@ -84,7 +83,9 @@ firebase.initializeApp(config);
         CrudComponent,
         SchemaComponent,
         PriorityComponent,
-        StorageComponent
+        StorageComponent,
+        AtomicArrayComponent,
+        AtomicObjectComponent
     ],
     imports: [
         BrowserModule,
@@ -94,9 +95,10 @@ firebase.initializeApp(config);
         MaterialModule,
         FlexLayoutModule,
         Ng2PageScrollModule.forRoot(),
-        MetaModule.forRoot(),
-        // AngularFireModule.initializeApp(environment.firebase),
         RouterModule.forRoot(routes),
+        MetaModule.forRoot(),
+        // AngularFireModule.initializeApp(environment.firebase)
+
     ],
     providers: [ TRANSLATION_PROVIDERS, TranslateService],
     bootstrap: [AppComponent]

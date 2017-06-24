@@ -12,7 +12,7 @@ export class AtomicPriority {
         this.ref = ref;
         this.increment = 50000000;
 
-        if (config === undefined) {
+        if (config === undefined || config === null) {
             this.orderSelected = 'dateAsc';
         } else {
             this.orderSelected = config.order;

@@ -57,8 +57,10 @@ export class Query {
     public remove(atomicObject: any): Promise<any> {
         const self = this;
         return new Promise(function(resolve, reject) {
-            self.alter(atomicObject, 'remove').then(function(response) {
-                resolve(response);
+            self.alter(atomicObject, 'update').then(function(response){
+                self.alter(atomicObject, 'remove').then(function(response){
+                    resolve(response);
+                }).catch(function(err){reject(err)});
             }).catch(function(err){reject(err)});
         });
     }

@@ -147,7 +147,7 @@ export class Schema {
                     $key: data.$key || data.key,
                     creationTS: data.val().creationTS,
                     lastEventTS: data.val().lastEventTS,
-                    // latestServerTS: data.val().latestServerTS, Hopefully replaced by AngularFire
+                    latestServerTS: data.val().latestServerTS,
                     $priority: data.getPriority() || defaultPriority
                 }
             }else {
@@ -160,6 +160,7 @@ export class Schema {
                 return {
                     creationTS: data.creationTS || currentClientTS,
                     lastEventTS: currentClientTS,
+                    latestServerTS: firebase.database.ServerValue.TIMESTAMP,
                     '.priority': data.$priority  || defaultPriority
                 }
             }else{
@@ -173,6 +174,7 @@ export class Schema {
                 return {
                     creationTS: data.creationTS || currentClientTS,
                     lastEventTS: currentClientTS,
+                    latestServerTS: firebase.database.ServerValue.TIMESTAMP,
                     '.priority': data.$priority  || defaultPriority
                 }
             }else{
@@ -187,6 +189,7 @@ export class Schema {
                     key: data.$key || data.key,
                     creationTS: data.creationTS || currentClientTS,
                     lastEventTS: currentClientTS,
+                    latestServerTS: firebase.database.ServerValue.TIMESTAMP,
                     '.priority': data.$priority  || defaultPriority
                 }
             }else{
