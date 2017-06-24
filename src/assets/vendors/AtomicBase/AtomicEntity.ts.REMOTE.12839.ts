@@ -5,9 +5,8 @@ import {RefRegistrator} from './RefRegistrator' ;
 import {AtomicPriority} from './AtomicPriority';
 import {Schema} from './Schema';
 import {Query} from './Query';
-import {Server} from './Server';
-import {AtomicArray} from './AtomicArray';
-import {AtomicFile} from './AtomicFile';
+import {AtomicFile2} from './AtomicFile2';
+
 
 
 
@@ -17,9 +16,7 @@ export class AtomicEntity {
     public atomicPriority: any;
     public schema: any;
     public query: any;
-    public server: any;
     public atomicFile: any;
-    public atomicArray: any;
 
     constructor(dbObject: any) {
   
@@ -46,24 +43,11 @@ export class AtomicEntity {
 
 
         /*
-         * Server Related
-         * */
-        this.server = new Server(this.ref);
-
-        /*
          * Atomic File Related
          * */
-        this.atomicFile = new AtomicFile(this.ref);
+        this.atomicFile = new AtomicFile2(this.ref);
     }
 
-
-    /*
-     * AtomicArray
-     * */
-
-    public getArrayInstance(): any {
-        return new AtomicArray(this);
-    }
 
 
     /*

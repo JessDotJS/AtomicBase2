@@ -6,8 +6,8 @@ import {AtomicPriority} from './AtomicPriority';
 import {Schema} from './Schema';
 import {Query} from './Query';
 import {Server} from './Server';
-import {AtomicArray} from './AtomicArray';
 import {AtomicFile} from './AtomicFile';
+import {AtomicArray} from './AtomicArray';
 
 
 
@@ -22,7 +22,6 @@ export class AtomicEntity {
     public atomicArray: any;
 
     constructor(dbObject: any) {
-  
         /*
          * Refs Related
          * */
@@ -85,10 +84,6 @@ export class AtomicEntity {
         return this
             .query
             .remove(record);
-    }
-
-    public upload(file:any){ 
-        return this.atomicFile.upload(file);
     }
 }
 

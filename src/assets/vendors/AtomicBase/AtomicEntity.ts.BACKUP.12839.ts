@@ -5,9 +5,14 @@ import {RefRegistrator} from './RefRegistrator' ;
 import {AtomicPriority} from './AtomicPriority';
 import {Schema} from './Schema';
 import {Query} from './Query';
+<<<<<<< HEAD
 import {Server} from './Server';
-import {AtomicArray} from './AtomicArray';
 import {AtomicFile} from './AtomicFile';
+import {AtomicArray} from './AtomicArray';
+=======
+import {AtomicFile2} from './AtomicFile2';
+
+>>>>>>> 35932f06e6fa9c7d765c477dee06fd48945f474c
 
 
 
@@ -53,7 +58,7 @@ export class AtomicEntity {
         /*
          * Atomic File Related
          * */
-        this.atomicFile = new AtomicFile(this.ref);
+        this.atomicFile = new AtomicFile2(this.ref);
     }
 
 
