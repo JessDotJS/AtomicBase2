@@ -2,14 +2,10 @@
  * Created by jessdotjs on 23/06/17.
  */
 
-export class AtomicArray {
-    /*
-     * Type of AtomicArray
-     * a) infinite - For infinite Scrolling + Pagination
-     * b) query - For search queries using QueryBase
-     * */
-    private type: string;
+import { Querybase } from 'querybase';
 
+
+export class AtomicArray {
     // Ref to be retrieved & Listened to
     private ref: any;
     private eventListenerRef: any;
@@ -55,25 +51,86 @@ export class AtomicArray {
      *   nextLotSize: number or defaults to 10
      * */
     public on(ref: any, config: any): Promise<any> {
-        // Init ref
-        this.ref = ref;
+        const self = this;
 
-        // infinite(config) or query(config)
-        return this[config.type](config);
-    }
-
-
-    /*
-     * Infinite Array
-     * */
-    private infinite(config: any): Promise<any> {
         // Set Defaults
         this.initialLotLoaded = false;
         this.itemsRemaining = false;
         this.fetching = false;
 
-        this.firstLotSize = config.firstLotSize || 10;
-        this.nextLotSize = config.nextLotSize || 10;
+        this.firstLotSize = config.firstLotSize || 99999;
+        this.nextLotSize = config.nextLotSize || 99999;
+
+
+        if(config.where !== undefined && config.where !== null) {
+            this.ref = new Querybase(ref, []);
+            return this.loadQuery(config.where);
+        }else {
+            this.ref = ref;
+            return this.loadFirstLot(config);
+        }
+    }
+
+    public off(): void {
+        this.unsubscribe();
+
+        this.initialLotLoaded = false;
+        this.itemsRemaining = false;
+        this.fetching = false;
+
+        this.items = [];
+    }
+
+
+    /*
+     * Load records using QueryBase
+     *
+     * Available Queries
+     * querybaseRef.where('name').startsWith('da');
+     * querybaseRef.where('age').lessThan(30);
+     * querybaseRef.where('age').greaterThan(20);
+     * querybaseRef.where('age').between(20, 30);
+     * */
+    private loadQuery(where: any): Promise<any> {
+        this.fetching = true;
+        const self = this;
+        return new Promise(function(resolve, reject){
+            let key: string;
+            /*
+            * Loop through where object
+            * */
+            for (key in where) {
+                if (!where.hasOwnProperty(key)) continue;
+                if(typeof where[key] === 'object'){
+                    let subKey: string;
+                    for (subKey in where[key]) {
+                        // Build the where statement
+                        self.eventListenerRef =
+                            self.ref.where(key)[subKey](where[key][subKey]);
+                        resolve(true);
+                    }
+                }else{
+                    self.eventListenerRef = self.ref.where(where[key]);
+                    resolve(true);
+                }
+            }
+
+            /*
+            * Register Event Listener
+            * */
+            self.eventListenerRef.on('value', function(snapshot){
+                self.fetching = false;
+                self.initialLotLoaded = true;
+                self.subscribe();
+                resolve(true);
+            });
+        });
+    }
+
+    /*
+     * Load First Lot Array
+     * */
+    private loadFirstLot(config: any): Promise<any> {
 
         const self = this;
         return new Promise(function(resolve, reject){
@@ -112,14 +169,6 @@ export class AtomicArray {
         });
     }
 
-
-    private query(): Promise<any> {
-        return new Promise(function(resolve, reject){
-            resolve(true);
-        });
-    }
-
-
     public loadNext(): Promise<any> {
         const self = this;
         return new Promise(function(resolve, reject){
@@ -147,17 +196,6 @@ export class AtomicArray {
             }else {
                 resolve(false);
             }
-        });
-    }
-
-    /*
-     * Snapshot Processor
-     * */
-
-    private processSnapshot(snapshot: any): void {
-        const self = this;
-        snapshot.forEach(function(item){
-            self.addItem(item, false);
         });
     }
 
@@ -200,9 +238,26 @@ export class AtomicArray {
     }
 
 
+
+
+    /*
+     * Snapshot Processor
+     * */
+
+    private processSnapshot(snapshot: any): void {
+        const self = this;
+        snapshot.forEach(function(item){
+            self.addItem(item, false);
+        });
+    }
+
+
     /*
      * Array Handlers
      * */
+
+
+
     private addItem(snapshot: any, isNew: boolean): void {
         const self = this;
         if(!self.itemExists(snapshot)){
