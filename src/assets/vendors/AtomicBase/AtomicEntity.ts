@@ -7,6 +7,7 @@ import {AtomicPriority} from './AtomicPriority';
 import {Query} from './Query';
 import {Server} from './Server';
 import {AtomicArray} from './AtomicArray';
+import {AtomicObject} from './AtomicObject';
 import {AtomicFile} from './AtomicFile';
 
 
@@ -19,7 +20,6 @@ export class AtomicEntity {
     public query: any;
     public server: any;
     public atomicFile: any;
-    public atomicArray: any;
 
     constructor(dbObject: any) {
   
@@ -65,6 +65,13 @@ export class AtomicEntity {
         return new AtomicArray(this);
     }
 
+    /*
+     * AtomicObject
+     * */
+
+    public getObjectInstance(): any {
+        return new AtomicObject(this);
+    }
 
     /*
     * Query Based Methods
