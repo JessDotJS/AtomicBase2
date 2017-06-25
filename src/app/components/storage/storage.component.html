@@ -3,9 +3,14 @@
 </p>
 
 <form>
-	<input type="file" id="image" type="file">
+	<input type="file" id="image">
 </form>
 
-<p *ngIf="UploadProgress!=null">Upload progress: {{UploadProgress}} </p>
+<p *ngIf="UploadProgress!=null && ImageUploaded==false ; else noImage">Upload progress: {{UploadProgress}} 
+</p>
 
+<ng-template #noImage>
+	<p *ngIf="noImageSelected">No image was selected</p>
+	<p *ngIf="ImageUploaded">Image uploaded</p>
+</ng-template>
 <button (click)= "UpLoad()">Upload image</button>
