@@ -5,8 +5,6 @@ export class RefRegistrator {
     public primary: any;
     public secondary: any;
     public foreign: any;
-    public rootStorage: any;
-    public primaryStorage: any;
 
 	constructor(refsObject:any){
 
