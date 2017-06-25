@@ -206,22 +206,22 @@ export class AtomicArray {
         const self = this;
         self.subscribed = true;
         self.eventListenerRef.on('child_added', function(snapshot) {
-            console.log('child_added');
+            // console.log('child_added');
             self.addItem(snapshot, true);
         });
 
         self.eventListenerRef.on('child_changed', function(snapshot) {
-            console.log('child_changed');
+            // console.log('child_changed');
             self.editItem(snapshot);
         });
 
         self.eventListenerRef.on('child_moved', function(snapshot) {
-            console.log('child_moved');
+            // console.log('child_moved');
             self.editItem(snapshot);
         });
 
         self.eventListenerRef.on('child_removed', function(snapshot) {
-            console.log('child_removed');
+            // console.log('child_removed');
             self.removeItem(snapshot);
         });
     }

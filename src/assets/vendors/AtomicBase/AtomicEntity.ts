@@ -2,8 +2,8 @@
  * Created by jessdotjs on 22/06/17.
  */
 import {RefRegistrator} from './RefRegistrator' ;
-import {AtomicPriority} from './AtomicPriority';
 import {Schema} from './Schema';
+import {AtomicPriority} from './AtomicPriority';
 import {Query} from './Query';
 import {Server} from './Server';
 import {AtomicArray} from './AtomicArray';
@@ -87,6 +87,10 @@ export class AtomicEntity {
             .remove(record);
     }
 
+
+    /*
+    * Storage Methods
+    * */
     public upload(file:any){ 
         return this.atomicFile.upload(file);
     }

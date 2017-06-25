@@ -36,8 +36,6 @@ export class AtomicArrayComponent implements OnInit {
             .child('articles/all');
 
         const advancedConfig = {
-            firstLotSize: 10,
-            nextLotSize: 5,
             where: {
                 titleSearchable: {
                     startsWith: 'ca'

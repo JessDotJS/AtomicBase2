@@ -28,7 +28,7 @@ export class Article extends AtomicEntity {
                     description: {
                         value: '='
                     },
-                    descriptionSearchable: {
+                    descriptionTags: {
                         value: function(article){
                             return article.description.toLowerCase();
                         }
