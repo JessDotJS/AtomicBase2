@@ -19,11 +19,6 @@ export class RefRegistrator {
 	        this.secondary = refsObject.secondary || false;
 	        this.foreign = refsObject.foreign || false;
 
-	        /*
-	         * Storage Related
-	         * */
-	        this.rootStorage = refsObject.rootStorage || firebase.storage().ref();
-	        this.primaryStorage = refsObject.primaryStorage || false;
 
 	    }else{
 	        throw "Firebase has not been initialized, make sure you initialize it at the end of your index.html (firebase.initializeApp(config);)";

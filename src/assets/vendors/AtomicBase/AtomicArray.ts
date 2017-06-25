@@ -50,7 +50,7 @@ export class AtomicArray {
      *   firstLotSize: number or defaults to 10
      *   nextLotSize: number or defaults to 10
      * */
-    public on(ref: any, config: any): Promise<any> {
+    public on(ref: any, config?: any): Promise<any> {
         const self = this;
 
         // Set Defaults
@@ -58,11 +58,15 @@ export class AtomicArray {
         this.itemsRemaining = false;
         this.fetching = false;
 
-        this.firstLotSize = config.firstLotSize || 99999;
-        this.nextLotSize = config.nextLotSize || 99999;
+        if(config === undefined) {
+            this.firstLotSize = 99999;
+            this.nextLotSize = 99999;
+        }else {
+            this.firstLotSize = config.firstLotSize || 99999;
+            this.nextLotSize = config.nextLotSize || 99999;
+        }
 
-
-        if(config.where !== undefined && config.where !== null) {
+        if(config !== undefined && config.where !== undefined && config.where !== null) {
             this.ref = new Querybase(ref, []);
             return this.loadQuery(config.where);
         }else {
@@ -189,7 +193,7 @@ export class AtomicArray {
                     setTimeout(function(){
                         self.fetching = false;
                         resolve(true);
-                    }, 5000);
+                    }, 3000);
                 }).catch(function(err){
                     reject(err);
                 });

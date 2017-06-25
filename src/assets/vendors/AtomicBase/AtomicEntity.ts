@@ -53,7 +53,7 @@ export class AtomicEntity {
         /*
          * Atomic File Related
          * */
-        this.atomicFile = new AtomicFile(this.ref);
+        this.atomicFile = new AtomicFile();
     }
 
 
@@ -91,8 +91,12 @@ export class AtomicEntity {
     /*
     * Storage Methods
     * */
-    public upload(file:any){ 
-        return this.atomicFile.upload(file);
+    public uploadFile(file: any, ref: string, config?: any): Promise<any>{
+        return this.atomicFile.upload(file, ref, config);
+    }
+
+    public deleteFile(ref: string): Promise<any>{
+        return this.atomicFile.deleteFile(ref);
     }
 }
 

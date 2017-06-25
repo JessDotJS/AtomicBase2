@@ -2,23 +2,66 @@ import * as firebase from 'firebase';
 
 
 export class AtomicFile {
-    ref: any;
-    progress: number;
+    public rootStorage: any;
+    public event: any;
+    public state: any;
 
-	constructor(ref){
-		this.ref = ref;
+	constructor() {
+        this.rootStorage = firebase.storage().ref();
 
+        this.event = {
+            changed: firebase.storage.TaskEvent.STATE_CHANGED
+        };
+
+        this.state = {
+            paused: firebase.storage.TaskState.PAUSED,
+            running: firebase.storage.TaskState.RUNNING
+        }
 	}
 
-	public upload(file:any){
+	protected upload(file: any, ref: string, config?: any): Promise<any> {
 		const self = this;
-		let storageRef = self.ref.rootStorage;
-		console.log('name: '+file.name );
-  		console.log('size: '+file.size);
-  		console.log('type: '+file.type);
-		let path = `/${file.name}`;
-		let iRef = storageRef.child(path);
-		return iRef.put(file);
+		const uploadRef = self.rootStorage.child(ref + '/' + AtomicFile.generateName(file));
+		return uploadRef.put(file);
 	}
 
+	protected deleteFile(ref: string): Promise<any>{
+	    return this.rootStorage.child(ref).delete();
+    }
+
+
+
+
+    private static generateName(file: any): string {
+        return AtomicFile.generateRandomNumbers() +
+            AtomicFile.generateRandomNumbers() + '-' +
+            AtomicFile.generateRandomNumbers() + '-' +
+            AtomicFile.generateRandomNumbers() + '-' +
+            AtomicFile.generateRandomNumbers() + '-' +
+            AtomicFile.generateRandomNumbers() + '-' +
+            AtomicFile.generateRandomNumbers() + '-' +
+            AtomicFile.generateRandomNumbers() + '.' +
+            AtomicFile.getFileExtension(file);
+    }
+
+    private static generateRandomNumbers(): string {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+
+    private static getFileExtension(file: any): string{
+        switch (file.type) {
+            case 'image/jpeg':
+                return 'jpeg';
+            case 'image/gif':
+                return 'gif';
+            case 'image/png':
+                return 'png';
+            case 'image/svg+xml':
+                return 'svg';
+            default:
+                break;
+        }
+    }
 }
