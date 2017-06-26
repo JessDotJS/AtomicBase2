@@ -39,11 +39,8 @@ import { routes } from './shared/routes/app.routes';
 
 
 /*
- * AngularFire + AtomicBase2 + Back-End Tools
+ * Back-End Tools
  * */
-/*import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';*/
 import * as firebase from 'firebase';
 
 
@@ -96,8 +93,7 @@ firebase.initializeApp(environment.firebase);
         FlexLayoutModule,
         Ng2PageScrollModule.forRoot(),
         RouterModule.forRoot(routes),
-        MetaModule.forRoot(),
-        // AngularFireModule.initializeApp(environment.firebase)
+        MetaModule.forRoot()
 
     ],
     providers: [ TRANSLATION_PROVIDERS, TranslateService],
