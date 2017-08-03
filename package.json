@@ -1,0 +1,29 @@
+{
+  "name": "atomicbase2",
+  "version": "1.0.0",
+  "description": "The Firebase Framework",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JessDotJS/AtomicBase2.git"
+  },
+  "keywords": [
+    "Firebase",
+    "Database",
+    "Real",
+    "Time",
+    "Angular"
+  ],
+  "author": "JessDotJS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JessDotJS/AtomicBase2/issues"
+  },
+  "homepage": "https://github.com/JessDotJS/AtomicBase2#readme"
+}
