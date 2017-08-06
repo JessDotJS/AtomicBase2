@@ -5,10 +5,14 @@ import * as firebase from 'firebase';
 
 export class Schema {
     private atomicPriority:any;
+    private valueHandler: any;
+
+    private dynamic: boolean;
+
     private primary: any;
     private secondary: any;
     private foreign: any;
-    private valueHandler: any;
+
 
     /*
      * Schema initialization
@@ -22,6 +26,7 @@ export class Schema {
             this.valueHandler = new ValueHandler();
 
             //Build Schema Configuration Objects
+            this.dynamic = schema.dynamic || false;
             this.primary = schema.primary || false;
             this.secondary = schema.secondary || false;
             this.foreign = schema.foreign || false;
@@ -41,8 +46,12 @@ export class Schema {
      * */
 
     public build(data: any,type: string): any {
-        const self = this;
-        let properties: any;
+            let properties: any;
+
+        if(this.dynamic) {
+            data.lastServerTS = firebase.database.ServerValue.TIMESTAMP;
+            return data;
+        }
 
         if(type === 'atomicObject'){
             properties  = data.val()
@@ -50,7 +59,7 @@ export class Schema {
             properties  = data
         }
 
-        return self.buildSchemaProperties(self.getPrebuiltData(data, type), properties, type);
+        return this.buildSchemaProperties(this.getPrebuiltData(data, type), properties, type);
     }
 
     /*
