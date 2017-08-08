@@ -37,7 +37,11 @@ export class AtomicObject {
         this.eventListenerRef = ref;
         return new Promise((resolve, reject) => {
             this.eventListenerRef.on('value', snapshot => {
-                this.item.next(this.schema.build(snapshot, 'atomicObject'));
+                if (this.schema.dynamic) {
+                    this.item.next(snapshot.val());
+                } else {
+                    this.item.next(this.schema.build(snapshot, 'atomicObject'));
+                }
                 this.loaded = true;
                 resolve(true);
             });

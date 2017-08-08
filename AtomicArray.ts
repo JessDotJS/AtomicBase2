@@ -144,7 +144,7 @@ export class AtomicArray {
             self.fetching = true;
             // Retrieve Initial Lot of records
             self.ref
-                .limitToFirst(5)
+                .limitToFirst(self.firstLotSize)
                 .once('value', function(snapshot){
                     // Get latest server timestamp
                     self.server.serverTimestamp()
