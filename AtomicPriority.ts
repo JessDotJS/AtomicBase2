@@ -118,7 +118,17 @@ export class AtomicPriority {
                     snapshot.forEach(function(itemSnapshot){
                         acum += itemSnapshot.getPriority();
                     });
-                    resolve(acum / 2);
+                    if (acum > nextItem.$priority) {
+                        resolve(acum / 2);
+                    } else {
+                        self.last()
+                            .then((lastPosition) => {
+                                console.log(lastPosition);
+                                resolve(lastPosition);
+                            })
+                            .catch((err) => {reject(err)})
+                    }
+
                 })
                 .catch(function(err){ reject(err); });
         });
