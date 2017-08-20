@@ -19,7 +19,7 @@ export class AtomicFile {
         }
 	}
 
-	protected upload(file: any, ref: string, config?: any): Promise<any> {
+	protected upload(file: any, ref: string, config?: any): any {
 		const self = this;
 		const uploadRef = self.rootStorage.child(ref + '/' + AtomicFile.generateName(file));
 		return uploadRef.put(file);

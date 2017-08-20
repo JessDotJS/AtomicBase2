@@ -111,7 +111,7 @@ export class AtomicEntity {
     /*
     * Storage Methods
     * */
-    public uploadFile(file: any, ref: string, config?: any): Promise<any>{
+    public uploadFile(file: any, ref: string, config?: any): any{
         return this.atomicFile.upload(file, ref, config);
     }
 
