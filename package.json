@@ -1,6 +1,6 @@
 {
   "name": "atomicbase2",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "The Firebase Framework",
   "main": "index.js",
   "directories": {
