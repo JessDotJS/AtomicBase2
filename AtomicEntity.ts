@@ -10,6 +10,7 @@ import {AtomicArray} from './AtomicArray';
 import {AtomicObject} from './AtomicObject';
 import {AtomicFile} from './AtomicFile';
 import {AtomicAuth} from './AtomicAuth';
+import {AtomicMessaging} from './AtomicMessaging';
 
 
 
@@ -22,9 +23,10 @@ export class AtomicEntity {
     public server: any;
     public atomicFile: any;
     public atomicAuth: any;
+    public atomicMessaging: any;
 
     constructor(dbObject: any) {
-  
+
         /*
          * Refs Related
          * */
@@ -61,6 +63,11 @@ export class AtomicEntity {
          * Atomic Auth Related
          * */
         this.atomicAuth = new AtomicAuth();
+
+        /*
+         * Atomic Messaging Related
+         * */
+        this.atomicMessaging = new AtomicMessaging();
     }
 
 
