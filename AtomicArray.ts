@@ -72,7 +72,10 @@ export class AtomicArray {
         if(config !== undefined && config.where !== undefined && config.where !== null) {
             this.ref = new Querybase(ref, []);
             return this.loadQuery(config.where);
-        }else {
+        } else if(config !== undefined &&  config.fullSync !== undefined && config.fullSync !== null && config.fullSync === true) {
+            this.ref = ref;
+            this.loadFullSync();
+        } else{
             this.ref = ref;
             return this.loadFirstLot(config);
         }
@@ -86,6 +89,26 @@ export class AtomicArray {
         this.fetching = false;
 
         this.items = [];
+    }
+
+
+    /*
+     * Full sync
+     *
+     * It will maintain a synced array with the database
+     * */
+    private loadFullSync(): Promise<any> {
+        this.fetching = true;
+        this.eventListenerRef = this.ref;
+
+        return new Promise((resolve, reject) => {
+            this.eventListenerRef.on('value', (snapshot) => {
+                this.fetching = false;
+                this.initialLotLoaded = true;
+                this.subscribe();
+                resolve(true);
+            });
+        });
     }
 
 
