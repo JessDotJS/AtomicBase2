@@ -74,7 +74,7 @@ export class AtomicArray {
             return this.loadQuery(config.where);
         } else if(config !== undefined &&  config.fullSync !== undefined && config.fullSync !== null && config.fullSync === true) {
             this.ref = ref;
-            this.loadFullSync();
+            return this.loadFullSync();
         } else{
             this.ref = ref;
             return this.loadFirstLot(config);
