@@ -43,6 +43,8 @@ export class AtomicObject {
                     } else {
                         this.item.next(this.schema.build(snapshot, 'atomicObject'));
                     }
+                }else {
+                    this.item.next({});
                 }
                 this.loaded = true;
                 resolve(true);
