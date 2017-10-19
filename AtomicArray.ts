@@ -216,11 +216,11 @@ export class AtomicArray {
                     // Process the snapshot
                     self.processSnapshot(snapshot);
 
-                    // Resolve after 5 seconds to prevent load spam on infinite scrolling
+                    // Resolve after 1.5 seconds to prevent load spam on infinite scrolling
                     setTimeout(function(){
                         self.fetching = false;
                         resolve(true);
-                    }, 3000);
+                    }, 1500);
                 }).catch(function(err){
                     reject(err);
                 });
