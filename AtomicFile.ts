@@ -60,6 +60,8 @@ export class AtomicFile {
                 return 'png';
             case 'image/svg+xml':
                 return 'svg';
+            case 'application/pdf':
+                return 'pdf';
             default:
                 break;
         }
