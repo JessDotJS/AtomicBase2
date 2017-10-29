@@ -105,7 +105,8 @@ export class AtomicArray {
             this.eventListenerRef.on('value', (snapshot) => {
                 this.fetching = false;
                 this.initialLotLoaded = true;
-                this.subscribe();
+                this.subscribed = true;
+                this.processFullSnapshot(snapshot);
                 resolve(true);
             });
         });
@@ -123,8 +124,7 @@ export class AtomicArray {
      * */
     private loadQuery(where: any): Promise<any> {
         this.fetching = true;
-        const self = this;
-        return new Promise(function(resolve, reject){
+        return new Promise((resolve, reject) => {
             let key: string;
             /*
             * Loop through where object
@@ -135,12 +135,12 @@ export class AtomicArray {
                     let subKey: string;
                     for (subKey in where[key]) {
                         // Build the where statement
-                        self.eventListenerRef =
-                            self.ref.where(key)[subKey](where[key][subKey]);
+                        this.eventListenerRef =
+                            this.ref.where(key)[subKey](where[key][subKey]);
                         resolve(true);
                     }
                 }else{
-                    self.eventListenerRef = self.ref.where(where[key]);
+                    this.eventListenerRef = this.ref.where(where[key]);
                     resolve(true);
                 }
             }
@@ -148,10 +148,11 @@ export class AtomicArray {
             /*
             * Register Event Listener
             * */
-            self.eventListenerRef.on('value', function(snapshot){
-                self.fetching = false;
-                self.initialLotLoaded = true;
-                self.subscribe();
+            this.eventListenerRef.on('value', (snapshot) => {
+                this.fetching = false;
+                this.initialLotLoaded = true;
+                this.subscribed = true;
+                this.processFullSnapshot(snapshot);
                 resolve(true);
             });
         });
@@ -264,11 +265,26 @@ export class AtomicArray {
             self.eventListenerRef.off('child_changed');
             self.eventListenerRef.off('child_moved');
             self.eventListenerRef.off('child_removed');
+            self.eventListenerRef.off();
             self.subscribed = false;
         }
     }
 
 
+
+
+    /*
+    * Full Snapshot Processor
+    * */
+    private processFullSnapshot(snapshot: any): void {
+        let items: any[] = [];
+        snapshot.forEach( (item) => {
+            let atomicObject = this.schema.build(item, 'atomicObject');
+            items.push(atomicObject);
+        });
+        //this.sortArray();
+        this.list.next(items);
+    }
 
 
     /*
