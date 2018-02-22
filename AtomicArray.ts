@@ -89,6 +89,7 @@ export class AtomicArray {
         this.fetching = false;
 
         this.items = [];
+        this.list.next([]);
     }
 
 

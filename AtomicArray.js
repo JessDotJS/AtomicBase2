@@ -56,6 +56,7 @@ var AtomicArray = /** @class */ (function () {
         this.itemsRemaining = false;
         this.fetching = false;
         this.items = [];
+        this.list.next([]);
     };
     /*
      * Full sync

@@ -38,6 +38,7 @@ var AtomicObject = /** @class */ (function () {
     };
     AtomicObject.prototype.off = function () {
         this.eventListenerRef.off('value');
+        this.item.next({});
     };
     return AtomicObject;
 }());

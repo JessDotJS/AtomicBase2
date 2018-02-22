@@ -55,5 +55,6 @@ export class AtomicObject {
 
     public off(): void {
         this.eventListenerRef.off('value');
+        this.item.next({});
     }
 }
